@@ -1,5 +1,4 @@
 //Libraries and variables
-const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const puppeteer = require('puppeteer');
 const express = require('express');
