@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: rgb(162,224,224);
+    background: linear-gradient(0deg, rgba(162,224,224,0.726) 0%, rgba(233,210,158,0.695) 100%);
+    font-size: 1.2em;
+}
+
+
+
+h1 {
+    text-align: center;
+    color: rgb(51, 51, 51);
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.8em;
+}
+
+
+
+
