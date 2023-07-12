@@ -68,59 +68,59 @@ async function organizeSearchInputs() {
 async function getPrices() {
 
   //Open browser and search sold items on ebay
-  const browser = await puppeteer.launch({
+  var browser = await puppeteer.launch({
     headless: false
   });
-  // const page = await browser.newPage();
-  // await page.goto('https://ebay.com');
-  // await page.waitForSelector("#gh-ac");
-  // await page.type('#gh-ac', searchFor);
-  // await page.click('input[value="Search"]');
-  // await page.waitForSelector('.checkbox__control');
-  // await page.click('.checkbox__control[aria-label="Sold Items"]');
+  const page = await browser.newPage();
+  await page.goto('https://ebay.com');
+  await page.waitForSelector("#gh-ac");
+  await page.type('#gh-ac', searchFor);
+  await page.click('input[value="Search"]');
+  await page.waitForSelector('.checkbox__control');
+  await page.click('.checkbox__control[aria-label="Sold Items"]');
 
 
-  // //Get item price and shipping cost and add them together. Store in array
-  // await page.waitForSelector('span.s-item__price');
-  // prices = await page.$$eval('span.s-item__price', elems => elems.map(elem => elem.innerText.split('$')[1].replace(',', '')));
-  // prices = prices.slice(1);
-  // try {
-  //   await page.waitForSelector('span.s-item__shipping');
-  //   shipPrices = await page.$$eval('span.s-item__shipping', elems => elems.map(elem => elem.innerText.replace(' shipping', '').split('$')[1]));
-  // } catch(error) {
-  //   console.log("No cards found under this description.");
-  //   await browser.close();
-  //   process.exit(1);
-  // }
-  // for (var i=0; i<prices.length; i++) {
-  //   if (shipPrices[i] == null) {shipPrices[i] = 0.0;}
-  //   totalPrices[i] = Math.round((parseFloat(prices[i]) + parseFloat(shipPrices[i])) * 100) / 100;
-  // }
-  // console.log("Total Cards: " + totalPrices.length);
+  //Get item price and shipping cost and add them together. Store in array
+  await page.waitForSelector('span.s-item__price');
+  prices = await page.$$eval('span.s-item__price', elems => elems.map(elem => elem.innerText.split('$')[1].replace(',', '')));
+  prices = prices.slice(1);
+  try {
+    await page.waitForSelector('span.s-item__shipping');
+    shipPrices = await page.$$eval('span.s-item__shipping', elems => elems.map(elem => elem.innerText.replace(' shipping', '').split('$')[1]));
+  } catch(error) {
+    console.log("No cards found under this description.");
+    await browser.close();
+    process.exit(1);
+  }
+  for (var i=0; i<prices.length; i++) {
+    if (shipPrices[i] == null) {shipPrices[i] = 0.0;}
+    totalPrices[i] = Math.round((parseFloat(prices[i]) + parseFloat(shipPrices[i])) * 100) / 100;
+  }
+  console.log("Total Cards: " + totalPrices.length);
 
 
-  // //Sort prices array and eliminate lowest 25% and highest 25%. Display middle 50%
-  // totalPrices.sort(function(a,b) { return a - b;});
-  // totalPrices = totalPrices.slice(Math.round(totalPrices.length*0.2), Math.round(totalPrices.length-(totalPrices.length*0.3)));
-  // console.log(totalPrices);
+  //Sort prices array and eliminate lowest 25% and highest 25%. Display middle 50%
+  totalPrices.sort(function(a,b) { return a - b;});
+  totalPrices = totalPrices.slice(Math.round(totalPrices.length*0.2), Math.round(totalPrices.length-(totalPrices.length*0.3)));
+  console.log(totalPrices);
 
 
-  // //Find average selling price and display
-  // for (var i=0; i<totalPrices.length; i++) {
-  //   avgPrice += totalPrices[i];
-  // }
-  // avgPrice /= totalPrices.length;
-  // if (avgPrice < 15) {avgPrice *= 0.9;}
-  // avgPrice = Math.round(avgPrice * 100) / 100;
-  // if (totalPrices.length < 2) {
-  //   console.log("Not enough cards sold for accurate pricing.");
-  // } else {
-  //   console.log(avgPrice);
-  // }
+  //Find average selling price and display
+  for (var i=0; i<totalPrices.length; i++) {
+    avgPrice += totalPrices[i];
+  }
+  avgPrice /= totalPrices.length;
+  if (avgPrice < 15) {avgPrice *= 0.9;}
+  avgPrice = Math.round(avgPrice * 100) / 100;
+  if (totalPrices.length < 2) {
+    console.log("Not enough cards sold for accurate pricing.");
+  } else {
+    console.log(avgPrice);
+  }
 
 
-  // //Close browser
-  // await browser.close();
+  //Close browser
+  await browser.close();
 
 }
 
