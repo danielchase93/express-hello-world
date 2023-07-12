@@ -8,6 +8,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "chrome": "yarn path && yarn find",
+    "path": "node -e \"console.log(require('puppeteer').executablePath())\" && echo \"File exists.\" || echo \"File does not exist.\"",
+    "find": "find / -name chrome | grep puppeteer | grep -v node_modules",
     "start": "node app.js"
   },
   "dependencies": {
