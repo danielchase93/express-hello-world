@@ -69,7 +69,7 @@ async function getPrices() {
 
   //Open browser and search sold items on ebay
   var browser = await puppeteer.launch({
-    headless: false
+    headless: true
   });
   const page = await browser.newPage();
   await page.goto('https://ebay.com');
